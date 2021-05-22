@@ -1,6 +1,6 @@
 import { Client } from "discord.js"
 
-type User = {
+type XpUser = {
     userID: string
     guildID: string
     xp: number
@@ -10,8 +10,8 @@ type User = {
     cleanNextLevelXp: number
 }
 
-type LeaderboardUser = {
-    serID: string
+type XpLeaderboardUser = {
+    userID: string
     guildID: string
     xp: number
     level: number
@@ -20,18 +20,39 @@ type LeaderboardUser = {
     discriminator: String | null
 }
 
+type CoinsUser = {
+    userID: string
+    guildID: string
+    coins: number
+}
+
+type CoinsLeaderboardUser = {
+    userID: string
+    guildID: string
+    coins: number
+    position: number
+    username: String | null
+    discriminator: String | null
+}
+
 declare module "bacc-lib" {
     export default class BaccLib {
         static async setURL(dbUrl: String) : Promise<typeof import("mongoose")>
-        static async addXp(userID: string, guildID: string, xp: number) : Promise<User>
-        static async addLevel(userID: string, guildID: string, levels: number) : Promise<User>
-        static async setXp(userID: string, guildID: string, xp: number) : Promise<User>
-        static async setLevel(userID: string, guildID: string, levels: number) : Promise<User>
-        static async subtractXp(userID: string, guildID: string, xp: number) : Promise<User>
-        static async subtractLevel(userID: string, guildID: string, levels: number) : Promise<User>
-        static async fetch(userID: string, guildID: string, fetchPosition = false) : Promise<User>
-        static async fetchLeaderboard(guildID: string, limit: number) : Promise<User[] | []>
-        static async computeLeaderboard(client: Client, leaderboard: User[], fetchUsers = false) : Promise<LeaderboardUser[] | []>
+        static async addXp(userID: string, guildID: string, xp: number) : Promise<XpUser>
+        static async addLevel(userID: string, guildID: string, levels: number) : Promise<XpUser>
+        static async setXp(userID: string, guildID: string, xp: number) : Promise<XpUser>
+        static async setLevel(userID: string, guildID: string, levels: number) : Promise<XpUser>
+        static async subtractXp(userID: string, guildID: string, xp: number) : Promise<XpUser>
+        static async subtractLevel(userID: string, guildID: string, levels: number) : Promise<XpUser>
+        static async fetchXp(userID: string, guildID: string, fetchPosition = false) : Promise<XpUser>
+        static async fetchXpLeaderboard(guildID: string, limit: number) : Promise<XpUser[] | []>
+        static async computeXpLeaderboard(client: Client, leaderboard: XpUser[], fetchUsers = false) : Promise<XpLeaderboardUser[] | []>
         static xpFor(targetLevel: number) : number
+        static async addCoins(userID: string, guildID: string, coins: number) : Promise<CoinsUser>
+        static async setCoins(userID: string, guildID: string, coins: number) : Promise<CoinsUser>
+        static async subtractCoins(userID: string, guildID: string, coins: number) : Promise<CoinsUser>
+        static async fetchCoins(userID: string, guildID: string, fetchPosition = false) : Promise<CoinsUser>
+        static async fetchCoinsLeaderboard(guildID: string, limit: number) : Promise<CoinsUser[] | []>
+        static async computeCoinsLeaderboard(client: Client, leaderboard: CoinsUser[], fetchUsers = false) : Promise<CoinsLeaderboardUser[] | []>
     }
 }
