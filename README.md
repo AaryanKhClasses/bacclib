@@ -7,8 +7,8 @@ $npm install bacclib@latest
 ```
 ---
 ### Commands
-- Levelling
-- Economy
+- [Levelling]
+- [Economy]
 ---
 ### Levelling System
 ##### - To start making a levelling system for your bot, you need to make a file named `levels.js` (or any other file name you want)
@@ -230,3 +230,5 @@ economy.subtractCoins(message.author.id, message.guild.id, '<amount of coins>')
 ---
 [Bacc]: <https://github.com/AaryanKhClasses/Bacc>
 [Canvacord]: <https://www.npmjs.com/package/canvacord>
+[Levelling]: <https://github.com/AaryanKhClasses/BaccLib#levelling-system>
+[Economy]: <https://github.com/AaryanKhClasses/BaccLib#economy-system>
