@@ -35,7 +35,7 @@ type CoinsLeaderboardUser = {
     discriminator: String | null
 }
 
-declare module "bacc-lib" {
+declare module "bacclib" {
     export default class BaccLib {
         static async setURL(dbUrl: String) : Promise<typeof import("mongoose")>
         static async addXp(userID: string, guildID: string, xp: number) : Promise<XpUser>
