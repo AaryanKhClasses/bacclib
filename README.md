@@ -7,8 +7,8 @@ $npm install bacclib@latest
 ```
 ---
 ### Commands
-- Levelling
-- Economy
+- [Levelling]
+- [Economy]
 ---
 ### Levelling System
 ##### - To start making a levelling system for your bot, you need to make a file named `levels.js` (or any other file name you want)
@@ -64,12 +64,12 @@ levels(client)
 ```js
 const { levelling } = require('bacclib')
 let target
-if(message.mentions.users.first()) {
-    target = message.mentions.users.first()
+if(message.mentions.members.first()) {
+    target = message.mentions.members.first()
 }else if(args[0]) {
-    target = message.guild.members.cache.get(args[0]).user
+    target = message.guild.members.cache.get(args[0])
 } else {
-    target = message.author
+    target = message.member
 }
 
 // the above code makes so if only !rank is typed, the rank of the author is going to be shown. If !rank <userid> is typed, it will show the rank of the member whose id is specified! If !rank @mention is typed, it will show rank of the member who has been mentioned!
@@ -185,12 +185,12 @@ economy(client)
 ```js
 const { economy } = require('bacclib')
 let target
-if(message.mentions.users.first()) {
-    target = message.mentions.users.first()
+if(message.mentions.members.first()) {
+    target = message.mentions.members.first()
 }else if(args[0]) {
-    target = message.guild.members.cache.get(args[0]).user
+    target = message.guild.members.cache.get(args[0])
 } else {
-    target = message.author
+    target = message.member
 }
 
 // the above code makes so if only !balance is typed, the balance of the author is going to be shown. If !balance <userid> is typed, it will show the balance of the member whose id is specified! If !balance @mention is typed, it will show balance of the member who has been mentioned!
@@ -230,3 +230,5 @@ economy.subtractCoins(message.author.id, message.guild.id, '<amount of coins>')
 ---
 [Bacc]: <https://github.com/AaryanKhClasses/Bacc>
 [Canvacord]: <https://www.npmjs.com/package/canvacord>
+[Levelling]: <https://github.com/AaryanKhClasses/BaccLib#levelling-system>
+[Economy]: <https://github.com/AaryanKhClasses/BaccLib#economy-system>

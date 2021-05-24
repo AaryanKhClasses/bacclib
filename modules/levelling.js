@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const levelModel = require('./models/levelModel')
+const levelModel = require('../models/levelModel')
 var mongoUrl
 
 class levelling {
