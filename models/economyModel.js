@@ -13,6 +13,21 @@ const economyModel = new mongoose.Schema({
     type: Number, 
     default: 0,
     required: true
+  },
+  lastDaily: {
+    type: Date,
+    default: new Date(),
+    required: true
+  },
+  lastWeekly: {
+    type: Date,
+    default: new Date(),
+    required: true
+  },
+  lastMonthly: {
+    type: Date,
+    default: new Date(),
+    required: true
   }
 });
 

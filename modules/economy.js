@@ -105,8 +105,6 @@ class economy {
         if (!user) return false
 
         user.coins -= coins
-        user.lastUpdated = new Date()
-    
         user.save().catch(e => console.log(`Failed to subtract coins: ${e}`) )
         return user
     }
@@ -161,6 +159,63 @@ class economy {
             }))
         }
         return computedArray
+    }
+
+    /**
+    * @param {string} [userID] - ID of the discord user!
+    * @param {string} [guildID] - ID of the discord guild!
+    * @param {number} [coins] - Number of coins to give
+    */
+    static async dailyCommand(userID, guildID, coins) {
+        const user = await economyModel.findOne({ userID: userID, guildID: guildID })
+        if(!user) return false
+
+        if(86400000 - (Date.now() - user.lastDaily) > 0) {
+            return
+        }
+
+        this.addCoins(userID, guildID, coins)
+        lastDaily = Date.now()
+        user.save().catch(e => console.log(`Failed to make daily command: ${e}`))
+        return user
+    }
+
+    /**
+    * @param {string} [userID] - ID of the discord user!
+    * @param {string} [guildID] - ID of the discord guild!
+    * @param {number} [coins] - Number of coins to give
+    */
+    static async weeklyCommand(userID, guildID, coins) {
+        const user = await economyModel.findOne({ userID: userID, guildID: guildID })
+        if(!user) return false
+
+        if(604800000 - (Date.now() - user.lastWeekly) > 0) {
+            return
+        }
+
+        this.addCoins(userID, guildID, coins)
+        lastWeekly = Date.now()
+        user.save().catch(e => console.log(`Failed to make weekly command: ${e}`))
+        return user
+    }
+
+    /**
+    * @param {string} [userID] - ID of the discord user!
+    * @param {string} [guildID] - ID of the discord guild!
+    * @param {number} [coins] - Number of coins to give
+    */
+     static async monthlyCommand(userID, guildID, coins) {
+        const user = await economyModel.findOne({ userID: userID, guildID: guildID })
+        if(!user) return false
+
+        if(2628000000 - (Date.now() - user.lastMonthly) > 0) {
+            return
+        }
+
+        this.addCoins(userID, guildID, coins)
+        lastMonthly = Date.now()
+        user.save().catch(e => console.log(`Failed to make monthly command: ${e}`))
+        return user
     }
 }
 
